@@ -62,7 +62,7 @@ screenGui.Parent = PlayerGui
 
 local iconButton = Instance.new("TextButton")
 iconButton.Size = UDim2.new(0, 42, 0, 42)
-iconButton.Position = UDim2.new(1, -55, 0, 15)
+iconButton.Position = UDim2.new(1, -55, 0, 12)
 iconButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 iconButton.Text = "🎯"
 iconButton.TextColor3 = Color3.fromRGB(255, 255, 255)
