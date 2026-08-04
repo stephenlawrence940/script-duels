@@ -1,4 +1,4 @@
---Auto Shoot BangGang
+--Auto Shoot BangGang 
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -15,6 +15,7 @@ getgenv().AstraTargetPart = nil
 _G.AutoShootFovSize = 70
 _G.FovCircleVisible = false
 
+-- Variable para el color del FOV al disparar
 local isShootingVisual = false
 
 local aroAutoShootFov = Drawing.new("Circle")
@@ -204,6 +205,7 @@ local isHiddenInvisible = false
 iconButton.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     mainFrame.Visible = not isMinimized
+    
     if not isHiddenInvisible then
         stroke.Color = isMinimized and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(255, 255, 255)
     end
@@ -211,6 +213,7 @@ end)
 
 hideButton.MouseButton1Click:Connect(function()
     isHiddenInvisible = not isHiddenInvisible
+    
     if isHiddenInvisible then
         iconButton.BackgroundTransparency = 1
         iconButton.TextTransparency = 1
@@ -224,6 +227,7 @@ hideButton.MouseButton1Click:Connect(function()
         hideButton.Text = "HIDE INVISIBLE: OFF"
         hideButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     end
+    
     isMinimized = true
     mainFrame.Visible = false
 end)
@@ -235,20 +239,16 @@ autoShootTrack.MouseButton1Click:Connect(function()
         getgenv().AstraTargetPart = nil 
         isShootingVisual = false
     end
-    pcall(function()
-        TweenService:Create(autoShootKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
-        TweenService:Create(autoShootTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
-    end)
+    TweenService:Create(autoShootKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
+    TweenService:Create(autoShootTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
 end)
 
 fovTrack.MouseButton1Click:Connect(function()
     _G.FovCircleVisible = not _G.FovCircleVisible
     local isON = _G.FovCircleVisible
     aroAutoShootFov.Visible = isON
-    pcall(function()
-        TweenService:Create(fovKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
-        TweenService:Create(fovTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
-    end)
+    TweenService:Create(fovKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
+    TweenService:Create(fovTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
 end)
 
 sizeInput.FocusLost:Connect(function()
@@ -273,15 +273,13 @@ task.spawn(function()
     params.FilterType = Enum.RaycastFilterType.Exclude
 
     local function esEnemigoAstra(p)
-        pcall(function()
-            if p ~= LocalPlayer and p.Character then
-                local myTeam = LocalPlayer:GetAttribute("Team")
-                local targetTeam = p:GetAttribute("Team")
-                if myTeam and targetTeam then return myTeam ~= targetTeam end
-                if LocalPlayer.Team and p.Team then return LocalPlayer.Team ~= p.Team end
-                return true
-            end
-        end)
+        if p ~= LocalPlayer and p.Character then
+            local myTeam = LocalPlayer:GetAttribute("Team")
+            local targetTeam = p:GetAttribute("Team")
+            if myTeam and targetTeam then return myTeam ~= targetTeam end
+            if LocalPlayer.Team and p.Team then return LocalPlayer.Team ~= p.Team end
+            return true
+        end
         return false
     end
 
@@ -310,58 +308,59 @@ task.spawn(function()
         local viewportSize = Camera.ViewportSize
         local centerScreen = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
 
-        pcall(function()
-            local playersList = Players:GetPlayers()
-            for i = 1, #playersList do
-                local p = playersList[i]
-                if esEnemigoAstra(p) and p.Character then
-                    local enemyHum = p.Character:FindFirstChild("Humanoid")
-                    if enemyHum and enemyHum.Health > 0 then
-                        params.FilterDescendantsInstances = {char, p.Character}
-                        
-                        local partsToCheck = {"Head", "HumanoidRootPart", "UpperTorso", "Torso"}
-                        for j = 1, #partsToCheck do
-                            local part = p.Character:FindFirstChild(partsToCheck[j])
-                            if part and part:IsA("BasePart") then
-                                
-                                local pasaFov = true
-                                if _G.FovCircleVisible then
-                                    local screenPos, onScreen = Camera:WorldToViewportPoint(part.Position)
-                                    pasaFov = false
-                                    if onScreen then
-                                        if (Vector2.new(screenPos.X, screenPos.Y) - centerScreen).Magnitude <= _G.AutoShootFovSize then
-                                            pasaFov = true
-                                        end
+        local playersList = Players:GetPlayers()
+        for i = 1, #playersList do
+            local p = playersList[i]
+            if esEnemigoAstra(p) and p.Character then
+                local enemyHum = p.Character:FindFirstChild("Humanoid")
+                if enemyHum and enemyHum.Health > 0 then
+                    params.FilterDescendantsInstances = {char, p.Character}
+                    
+                    local partsToCheck = {"Head", "HumanoidRootPart", "UpperTorso", "Torso"}
+                    for j = 1, #partsToCheck do
+                        local part = p.Character:FindFirstChild(partsToCheck[j])
+                        if part and part:IsA("BasePart") then
+                            
+                            local pasaFov = true
+                            if _G.FovCircleVisible then
+                                local screenPos, onScreen = Camera:WorldToViewportPoint(part.Position)
+                                pasaFov = false
+                                if onScreen then
+                                    if (Vector2.new(screenPos.X, screenPos.Y) - centerScreen).Magnitude <= _G.AutoShootFovSize then
+                                        pasaFov = true
                                     end
                                 end
-
-                                if pasaFov then
-                                    local dist = (part.Position - myPos).Magnitude
-                                    if dist < shortestDistance then
-                                        if not workspace:Raycast(headPos, part.Position - headPos, params) then
-                                            shortestDistance = dist
-                                            closestTargetPart = part
-                                        end
-                                    end
-                                end
-
                             end
+
+                            if pasaFov then
+                                local dist = (part.Position - myPos).Magnitude
+                                if dist < shortestDistance then
+                                    if not workspace:Raycast(headPos, part.Position - headPos, params) then
+                                        shortestDistance = dist
+                                        closestTargetPart = part
+                                    end
+                                end
+                            end
+
                         end
                     end
                 end
             end
-        end)
+        end
         
         if closestTargetPart then
             getgenv().AstraTargetPart = closestTargetPart
+            
+            -- Activa la señal visual verde sincronizada con el disparo exacto
             isShootingVisual = true
             pcall(function() 
                 arma:Activate() 
                 task.delay(0.05, function() 
-                    if arma and arma.Parent == char then arma:Deactivate() end
+                    if arma.Parent == char then arma:Deactivate() end
                     isShootingVisual = false
                 end)
             end)
+            
             task.wait(0.15)
         else
             getgenv().AstraTargetPart = nil
@@ -371,17 +370,16 @@ task.spawn(function()
 end)
 
 RunService.RenderStepped:Connect(function()
-    pcall(function()
-        if screenGui.Parent then
-            local viewportSize = Camera.ViewportSize
-            aroAutoShootFov.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
-            aroAutoShootFov.Radius = _G.AutoShootFovSize
-            
-            if isShootingVisual then
-                aroAutoShootFov.Color = Color3.fromRGB(0, 255, 100)
-            else
-                aroAutoShootFov.Color = Color3.fromRGB(255, 255, 255)
-            end
+    if screenGui.Parent then
+        local viewportSize = Camera.ViewportSize
+        aroAutoShootFov.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
+        aroAutoShootFov.Radius = _G.AutoShootFovSize
+        
+        -- Cambia el FOV a verde cuando dispara, y blanco por defecto
+        if isShootingVisual then
+            aroAutoShootFov.Color = Color3.fromRGB(0, 255, 100)
+        else
+            aroAutoShootFov.Color = Color3.fromRGB(255, 255, 255)
         end
-    end)
+    end
 end)
