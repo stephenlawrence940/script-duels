@@ -1,4 +1,4 @@
---Auto Shoot BangGang 
+--Auto Shoot BangGang
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -15,7 +15,6 @@ getgenv().AstraTargetPart = nil
 _G.AutoShootFovSize = 70
 _G.FovCircleVisible = false
 
--- Variable de control para el estado de disparo y cambio de color del FOV
 local isShootingVisual = false
 
 local aroAutoShootFov = Drawing.new("Circle")
@@ -205,7 +204,6 @@ local isHiddenInvisible = false
 iconButton.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     mainFrame.Visible = not isMinimized
-    
     if not isHiddenInvisible then
         stroke.Color = isMinimized and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(255, 255, 255)
     end
@@ -213,7 +211,6 @@ end)
 
 hideButton.MouseButton1Click:Connect(function()
     isHiddenInvisible = not isHiddenInvisible
-    
     if isHiddenInvisible then
         iconButton.BackgroundTransparency = 1
         iconButton.TextTransparency = 1
@@ -227,7 +224,6 @@ hideButton.MouseButton1Click:Connect(function()
         hideButton.Text = "HIDE INVISIBLE: OFF"
         hideButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     end
-    
     isMinimized = true
     mainFrame.Visible = false
 end)
@@ -239,16 +235,20 @@ autoShootTrack.MouseButton1Click:Connect(function()
         getgenv().AstraTargetPart = nil 
         isShootingVisual = false
     end
-    TweenService:Create(autoShootKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
-    TweenService:Create(autoShootTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
+    pcall(function()
+        TweenService:Create(autoShootKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
+        TweenService:Create(autoShootTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
+    end)
 end)
 
 fovTrack.MouseButton1Click:Connect(function()
     _G.FovCircleVisible = not _G.FovCircleVisible
     local isON = _G.FovCircleVisible
     aroAutoShootFov.Visible = isON
-    TweenService:Create(fovKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
-    TweenService:Create(fovTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
+    pcall(function()
+        TweenService:Create(fovKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
+        TweenService:Create(fovTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
+    end)
 end)
 
 sizeInput.FocusLost:Connect(function()
@@ -273,13 +273,15 @@ task.spawn(function()
     params.FilterType = Enum.RaycastFilterType.Exclude
 
     local function esEnemigoAstra(p)
-        if p ~= LocalPlayer and p.Character then
-            local myTeam = LocalPlayer:GetAttribute("Team")
-            local targetTeam = p:GetAttribute("Team")
-            if myTeam and targetTeam then return myTeam ~= targetTeam end
-            if LocalPlayer.Team and p.Team then return LocalPlayer.Team ~= p.Team end
-            return true
-        end
+        pcall(function()
+            if p ~= LocalPlayer and p.Character then
+                local myTeam = LocalPlayer:GetAttribute("Team")
+                local targetTeam = p:GetAttribute("Team")
+                if myTeam and targetTeam then return myTeam ~= targetTeam end
+                if LocalPlayer.Team and p.Team then return LocalPlayer.Team ~= p.Team end
+                return true
+            end
+        end)
         return false
     end
 
@@ -308,59 +310,58 @@ task.spawn(function()
         local viewportSize = Camera.ViewportSize
         local centerScreen = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
 
-        local playersList = Players:GetPlayers()
-        for i = 1, #playersList do
-            local p = playersList[i]
-            if esEnemigoAstra(p) and p.Character then
-                local enemyHum = p.Character:FindFirstChild("Humanoid")
-                if enemyHum and enemyHum.Health > 0 then
-                    params.FilterDescendantsInstances = {char, p.Character}
-                    
-                    local partsToCheck = {"Head", "HumanoidRootPart", "UpperTorso", "Torso"}
-                    for j = 1, #partsToCheck do
-                        local part = p.Character:FindFirstChild(partsToCheck[j])
-                        if part and part:IsA("BasePart") then
-                            
-                            local pasaFov = true
-                            if _G.FovCircleVisible then
-                                local screenPos, onScreen = Camera:WorldToViewportPoint(part.Position)
-                                pasaFov = false
-                                if onScreen then
-                                    if (Vector2.new(screenPos.X, screenPos.Y) - centerScreen).Magnitude <= _G.AutoShootFovSize then
-                                        pasaFov = true
+        pcall(function()
+            local playersList = Players:GetPlayers()
+            for i = 1, #playersList do
+                local p = playersList[i]
+                if esEnemigoAstra(p) and p.Character then
+                    local enemyHum = p.Character:FindFirstChild("Humanoid")
+                    if enemyHum and enemyHum.Health > 0 then
+                        params.FilterDescendantsInstances = {char, p.Character}
+                        
+                        local partsToCheck = {"Head", "HumanoidRootPart", "UpperTorso", "Torso"}
+                        for j = 1, #partsToCheck do
+                            local part = p.Character:FindFirstChild(partsToCheck[j])
+                            if part and part:IsA("BasePart") then
+                                
+                                local pasaFov = true
+                                if _G.FovCircleVisible then
+                                    local screenPos, onScreen = Camera:WorldToViewportPoint(part.Position)
+                                    pasaFov = false
+                                    if onScreen then
+                                        if (Vector2.new(screenPos.X, screenPos.Y) - centerScreen).Magnitude <= _G.AutoShootFovSize then
+                                            pasaFov = true
+                                        end
                                     end
                                 end
-                            end
 
-                            if pasaFov then
-                                local dist = (part.Position - myPos).Magnitude
-                                if dist < shortestDistance then
-                                    if not workspace:Raycast(headPos, part.Position - headPos, params) then
-                                        shortestDistance = dist
-                                        closestTargetPart = part
+                                if pasaFov then
+                                    local dist = (part.Position - myPos).Magnitude
+                                    if dist < shortestDistance then
+                                        if not workspace:Raycast(headPos, part.Position - headPos, params) then
+                                            shortestDistance = dist
+                                            closestTargetPart = part
+                                        end
                                     end
                                 end
-                            end
 
+                            end
                         end
                     end
                 end
             end
-        end
+        end)
         
         if closestTargetPart then
             getgenv().AstraTargetPart = closestTargetPart
-            
-            -- Sincronización exacta del disparo y color verde en el FOV
             isShootingVisual = true
             pcall(function() 
                 arma:Activate() 
                 task.delay(0.05, function() 
-                    if arma.Parent == char then arma:Deactivate() end
+                    if arma and arma.Parent == char then arma:Deactivate() end
                     isShootingVisual = false
                 end)
             end)
-            
             task.wait(0.15)
         else
             getgenv().AstraTargetPart = nil
@@ -370,347 +371,17 @@ task.spawn(function()
 end)
 
 RunService.RenderStepped:Connect(function()
-    if screenGui.Parent then
-        local viewportSize = Camera.ViewportSize
-        aroAutoShootFov.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
-        aroAutoShootFov.Radius = _G.AutoShootFovSize
-        
-        -- Si está disparando se vuelve verde brillante, sino se queda blanco por defecto
-        if isShootingVisual then
-            aroAutoShootFov.Color = Color3.fromRGB(0, 255, 100)
-        else
-            aroAutoShootFov.Color = Color3.fromRGB(255, 255, 255)
-        end
-    end
-end)
-                        return oldNamecall(self, origin, newDir, p3)
-                    end
-                elseif string.find(method, "FindPartOnRay") and self == workspace then
-                    local ray, p2, p3, p4 = ...
-                    if typeof(ray) == "Ray" and ray.Direction.Magnitude > 20 then
-                        local newRay = Ray.new(ray.Origin, (target.Position - ray.Origin).Unit * 5000)
-                        return oldNamecall(self, newRay, p2, p3, p4)
-                    end
-                end
+    pcall(function()
+        if screenGui.Parent then
+            local viewportSize = Camera.ViewportSize
+            aroAutoShootFov.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
+            aroAutoShootFov.Radius = _G.AutoShootFovSize
+            
+            if isShootingVisual then
+                aroAutoShootFov.Color = Color3.fromRGB(0, 255, 100)
             else
-                getgenv().AstraTargetPart = nil
+                aroAutoShootFov.Color = Color3.fromRGB(255, 255, 255)
             end
         end
-        return oldNamecall(self, ...)
     end)
-end)
-
-if PlayerGui:FindFirstChild("InterfazAutoShoot_Delta") then
-    PlayerGui.InterfazAutoShoot_Delta:Destroy()
-end
-
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "InterfazAutoShoot_Delta"
-screenGui.ResetOnSpawn = false 
-screenGui.Parent = PlayerGui
-
-local iconButton = Instance.new("TextButton")
-iconButton.Size = UDim2.new(0, 42, 0, 42)
-iconButton.Position = UDim2.new(1, -55, 0, 12)
-iconButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-iconButton.Text = "🎯"
-iconButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-iconButton.Font = Enum.Font.GothamBold
-iconButton.TextSize = 22
-iconButton.Active = true
-iconButton.Parent = screenGui
-
-Instance.new("UICorner", iconButton).CornerRadius = UDim.new(1, 0)
-local stroke = Instance.new("UIStroke", iconButton)
-stroke.Color = Color3.fromRGB(255, 255, 255)
-stroke.Thickness = 1.5
-
-local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 200, 0, 215)
-mainFrame.Position = UDim2.new(0.5, -100, 0.2, 0)
-mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-mainFrame.BorderSizePixel = 0
-mainFrame.Active = true
-mainFrame.Parent = screenGui
-Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
-
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Size = UDim2.new(1, 0, 0, 35)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "AS y FOV / By:Jesús Hub"
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 13
-titleLabel.Parent = mainFrame
-
-local function createSwitch(yPos, labelText, startState)
-    local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(0, 100, 0, 24)
-    label.Position = UDim2.new(0, 12, 0, yPos)
-    label.BackgroundTransparency = 1
-    label.Text = labelText
-    label.TextColor3 = Color3.fromRGB(200, 200, 200)
-    label.Font = Enum.Font.GothamMedium
-    label.TextSize = 11
-    label.TextXAlignment = Enum.TextXAlignment.Left
-    label.Parent = mainFrame
-
-    local track = Instance.new("TextButton")
-    track.Size = UDim2.new(0, 42, 0, 22)
-    track.Position = UDim2.new(1, -54, 0, yPos + 1)
-    track.BackgroundColor3 = startState and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)
-    track.Text = ""
-    track.Parent = mainFrame
-    Instance.new("UICorner", track).CornerRadius = UDim.new(1, 0)
-
-    local knob = Instance.new("Frame")
-    knob.Size = UDim2.new(0, 16, 0, 16)
-    knob.Position = startState and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)
-    knob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    knob.Parent = track
-    Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
-    
-    return track, knob
-end
-
-local autoShootTrack, autoShootKnob = createSwitch(40, "AUTOSHOOT", false)
-local fovTrack, fovKnob = createSwitch(75, "RADIO FOV", false)
-
-local sizeLabel = Instance.new("TextLabel")
-sizeLabel.Size = UDim2.new(0, 100, 0, 26)
-sizeLabel.Position = UDim2.new(0, 12, 0, 110)
-sizeLabel.BackgroundTransparency = 1
-sizeLabel.Text = "TAMAÑO FOV"
-sizeLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-sizeLabel.Font = Enum.Font.GothamMedium
-sizeLabel.TextSize = 11
-sizeLabel.TextXAlignment = Enum.TextXAlignment.Left
-sizeLabel.Parent = mainFrame
-
-local sizeInput = Instance.new("TextBox")
-sizeInput.Size = UDim2.new(0, 54, 0, 26)
-sizeInput.Position = UDim2.new(1, -66, 0, 110)
-sizeInput.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-sizeInput.Text = tostring(_G.AutoShootFovSize)
-sizeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-sizeInput.Font = Enum.Font.GothamBold
-sizeInput.TextSize = 13
-sizeInput.TextXAlignment = Enum.TextXAlignment.Center
-sizeInput.Parent = mainFrame
-Instance.new("UICorner", sizeInput).CornerRadius = UDim.new(0, 6)
-
-local hideButton = Instance.new("TextButton")
-hideButton.Size = UDim2.new(1, -24, 0, 24)
-hideButton.Position = UDim2.new(0, 12, 0, 148)
-hideButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-hideButton.Text = "HIDE INVISIBLE: OFF"
-hideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-hideButton.Font = Enum.Font.GothamBold
-hideButton.TextSize = 10
-hideButton.Parent = mainFrame
-Instance.new("UICorner", hideButton).CornerRadius = UDim.new(0, 6)
-
-local destroyButton = Instance.new("TextButton")
-destroyButton.Size = UDim2.new(1, -24, 0, 24)
-destroyButton.Position = UDim2.new(0, 12, 0, 178)
-destroyButton.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
-destroyButton.Text = "DESTROY SCRIPT"
-destroyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-destroyButton.Font = Enum.Font.GothamBold
-destroyButton.TextSize = 10
-destroyButton.Parent = mainFrame
-Instance.new("UICorner", destroyButton).CornerRadius = UDim.new(0, 6)
-
-local function makeDraggable(frame)
-    local dragging, dragStart, startPos
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            dragStart = input.Position
-            startPos = frame.Position
-        end
-    end)
-    UserInputService.InputChanged:Connect(function(input)
-        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-            local delta = input.Position - dragStart
-            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        end
-    end)
-    UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = false
-        end
-    end)
-end
-
-makeDraggable(mainFrame)
-
-local isMinimized = false
-local isHiddenInvisible = false
-
-iconButton.MouseButton1Click:Connect(function()
-    isMinimized = not isMinimized
-    mainFrame.Visible = not isMinimized
-    
-    if not isHiddenInvisible then
-        stroke.Color = isMinimized and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(255, 255, 255)
-    end
-end)
-
-hideButton.MouseButton1Click:Connect(function()
-    isHiddenInvisible = not isHiddenInvisible
-    
-    if isHiddenInvisible then
-
-        iconButton.BackgroundTransparency = 1
-        iconButton.TextTransparency = 1
-        stroke.Transparency = 1
-        hideButton.Text = "HIDE INVISIBLE: ON"
-        hideButton.BackgroundColor3 = Color3.fromRGB(76, 175, 80)
-    else
-
-        iconButton.BackgroundTransparency = 0
-        iconButton.TextTransparency = 0
-        stroke.Transparency = 0
-        hideButton.Text = "HIDE INVISIBLE: OFF"
-        hideButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-    end
-    
-
-    isMinimized = true
-    mainFrame.Visible = false
-end)
-
-autoShootTrack.MouseButton1Click:Connect(function()
-    getgenv().AstraAutoShotActive = not getgenv().AstraAutoShotActive
-    local isON = getgenv().AstraAutoShotActive
-    if not isON then getgenv().AstraTargetPart = nil end
-    TweenService:Create(autoShootKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
-    TweenService:Create(autoShootTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
-end)
-
-fovTrack.MouseButton1Click:Connect(function()
-    _G.FovCircleVisible = not _G.FovCircleVisible
-    local isON = _G.FovCircleVisible
-    aroAutoShootFov.Visible = isON
-    TweenService:Create(fovKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
-    TweenService:Create(fovTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
-end)
-
-sizeInput.FocusLost:Connect(function()
-    local valorNuevo = tonumber(sizeInput.Text)
-    if valorNuevo then
-        _G.AutoShootFovSize = valorNuevo
-        aroAutoShootFov.Radius = valorNuevo
-    else
-        sizeInput.Text = tostring(_G.AutoShootFovSize)
-    end
-end)
-
-destroyButton.MouseButton1Click:Connect(function()
-    getgenv().AstraAutoShotActive = false
-    getgenv().AstraTargetPart = nil
-    pcall(function() aroAutoShootFov:Remove() end)
-    if screenGui then screenGui:Destroy() end
-end)
-
-task.spawn(function()
-    local params = RaycastParams.new()
-    params.FilterType = Enum.RaycastFilterType.Exclude
-
-    local function esEnemigoAstra(p)
-        if p ~= LocalPlayer and p.Character then
-            local myTeam = LocalPlayer:GetAttribute("Team")
-            local targetTeam = p:GetAttribute("Team")
-            if myTeam and targetTeam then return myTeam ~= targetTeam end
-            if LocalPlayer.Team and p.Team then return LocalPlayer.Team ~= p.Team end
-            return true
-        end
-        return false
-    end
-
-    while screenGui.Parent do
-        task.wait(0.15)
-        if not getgenv().AstraAutoShotActive then
-            getgenv().AstraTargetPart = nil
-            continue
-        end
-
-        local char = LocalPlayer.Character
-        if not char or not char:FindFirstChild("HumanoidRootPart") then continue end
-
-        local arma = char:FindFirstChildOfClass("Tool")
-        if not arma or not arma:FindFirstChild("Handle") then 
-            getgenv().AstraTargetPart = nil
-            continue 
-        end
-
-        local closestTargetPart = nil
-        local shortestDistance = math.huge
-        local myPos = char.HumanoidRootPart.Position
-        local headPos = char:FindFirstChild("Head") and char.Head.Position or myPos
-        local viewportSize = Camera.ViewportSize
-        local centerScreen = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
-
-        local playersList = Players:GetPlayers()
-        for i = 1, #playersList do
-            local p = playersList[i]
-            if esEnemigoAstra(p) and p.Character then
-                local enemyHum = p.Character:FindFirstChild("Humanoid")
-                if enemyHum and enemyHum.Health > 0 then
-                    params.FilterDescendantsInstances = {char, p.Character}
-                    
-                    local partsToCheck = {"Head", "HumanoidRootPart", "UpperTorso", "Torso"}
-                    for j = 1, #partsToCheck do
-                        local part = p.Character:FindFirstChild(partsToCheck[j])
-                        if part and part:IsA("BasePart") then
-                            
-                            local pasaFov = true
-                            if _G.FovCircleVisible then
-                                local screenPos, onScreen = Camera:WorldToViewportPoint(part.Position)
-                                pasaFov = false
-                                if onScreen then
-                                    if (Vector2.new(screenPos.X, screenPos.Y) - centerScreen).Magnitude <= _G.AutoShootFovSize then
-                                        pasaFov = true
-                                    end
-                                end
-                            end
-
-                            if pasaFov then
-                                local dist = (part.Position - myPos).Magnitude
-                                if dist < shortestDistance then
-                                    if not workspace:Raycast(headPos, part.Position - headPos, params) then
-                                        shortestDistance = dist
-                                        closestTargetPart = part
-                                    end
-                                end
-                            end
-
-                        end
-                    end
-                end
-            end
-        end
-        
-        if closestTargetPart then
-            getgenv().AstraTargetPart = closestTargetPart
-            pcall(function() 
-                arma:Activate() 
-                task.delay(0.05, function() 
-                    if arma.Parent == char then arma:Deactivate() end
-                end)
-            end)
-            task.wait(0.15)
-        else
-            getgenv().AstraTargetPart = nil
-        end
-    end
-end)
-
-RunService.RenderStepped:Connect(function()
-    if screenGui.Parent then
-        local viewportSize = Camera.ViewportSize
-        aroAutoShootFov.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
-        aroAutoShootFov.Radius = _G.AutoShootFovSize
-    end
 end)
