@@ -1,4 +1,4 @@
---Auto Shoot BangGang (Completo y con Reseteo Automático de Toggles)
+-- Auto Shoot BangGang
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -290,7 +290,6 @@ local function esPistolaValida(tool)
     return false
 end
 
--- Detección de Lobby basada en si tus herramientas están ocultas o vacías
 local function estaEnLobby()
     local backpack = LocalPlayer:FindFirstChildOfClass("Backpack")
     local char = LocalPlayer.Character
@@ -334,7 +333,6 @@ task.spawn(function()
     while screenGui.Parent do
         task.wait(0.2)
 
-        -- Si estás en el lobby, apaga los toggles automáticamente de forma visual e interna
         if estaEnLobby() then
             if getgenv().AstraAutoShotActive or getgenv().AstraAutoEquipActive then
                 actualizarUIAutoShoot(false)
@@ -697,7 +695,6 @@ destroyButton.MouseButton1Click:Connect(function()
     if screenGui then screenGui:Destroy() end
 end)
 
--- Validador basado en la estructura de la pistola ("fire") y evitando cuchillos ("Slash")
 local function esPistolaValida(tool)
     if not tool or not tool:IsA("Tool") then return false end
     if tool:FindFirstChild("fire") and tool.fire:IsA("RemoteEvent") then
@@ -792,11 +789,9 @@ task.spawn(function()
             armaActual = nil
         end
 
-        -- Si el AUTOSHOOT encuentra un enemigo válido directamente en la mira sin paredes
         if closestTargetPart then
             getgenv().AstraTargetPart = closestTargetPart
             
-            -- SOLO SI el toggle AUTO EQUIP está activado y no tenemos la pistola en mano, la sacamos de la mochila
             if getgenv().AstraAutoEquipActive and not armaActual and backpack then
                 for _, item in ipairs(backpack:GetChildren()) do
                     if esPistolaValida(item) then
@@ -807,7 +802,6 @@ task.spawn(function()
                 end
             end
 
-            -- Si ya tenemos la pistola equipada (ya sea por auto-equip o de forma manual), disparamos instantáneamente
             if armaActual and armaActual:FindFirstChild("Handle") then
                 isShootingVisual = true
                 pcall(function() 
@@ -822,7 +816,6 @@ task.spawn(function()
             getgenv().AstraTargetPart = nil
             isShootingVisual = false
 
-            -- Si no hay enemigos en la mira y el Auto Equip está activo, guardamos la pistola de vuelta
             if getgenv().AstraAutoEquipActive and armaActual and backpack and esPistolaValida(armaActual) then
                 armaActual.Parent = backpack
             end
