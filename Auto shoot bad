@@ -11,11 +11,11 @@ local Camera = Workspace.CurrentCamera
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 getgenv().AstraAutoShotActive = false
+getgenv().AstraAutoEquipActive = false
 getgenv().AstraTargetPart = nil
 _G.AutoShootFovSize = 70
 _G.FovCircleVisible = false
 
--- Variable para el color del FOV al disparar
 local isShootingVisual = false
 
 local aroAutoShootFov = Drawing.new("Circle")
@@ -65,7 +65,7 @@ screenGui.Parent = PlayerGui
 
 local iconButton = Instance.new("TextButton")
 iconButton.Size = UDim2.new(0, 42, 0, 42)
-iconButton.Position = UDim2.new(1, -55, 0, 12)
+iconButton.Position = UDim2.new(1, -55, 0, 11)
 iconButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 iconButton.Text = "🎯"
 iconButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -80,7 +80,7 @@ stroke.Color = Color3.fromRGB(255, 255, 255)
 stroke.Thickness = 1.5
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 200, 0, 215)
+mainFrame.Size = UDim2.new(0, 200, 0, 250)
 mainFrame.Position = UDim2.new(0.5, -100, 0.2, 0)
 mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 mainFrame.BorderSizePixel = 0
@@ -91,10 +91,10 @@ Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 local titleLabel = Instance.new("TextLabel")
 titleLabel.Size = UDim2.new(1, 0, 0, 35)
 titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "AS y FOV / By:Jesús Hub"
+titleLabel.Text = "By:Jesús Hub"
 titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 13
+titleLabel.TextSize = 10
 titleLabel.Parent = mainFrame
 
 local function createSwitch(yPos, labelText, startState)
@@ -127,12 +127,13 @@ local function createSwitch(yPos, labelText, startState)
     return track, knob
 end
 
-local autoShootTrack, autoShootKnob = createSwitch(40, "AUTOSHOOT", false)
-local fovTrack, fovKnob = createSwitch(75, "RADIO FOV", false)
+local autoShootTrack, autoShootKnob = createSwitch(38, "AUTOSHOOT", false)
+local autoEquipTrack, autoEquipKnob = createSwitch(71, "AUTO EQUIP", false)
+local fovTrack, fovKnob = createSwitch(104, "RADIO FOV", false)
 
 local sizeLabel = Instance.new("TextLabel")
 sizeLabel.Size = UDim2.new(0, 100, 0, 26)
-sizeLabel.Position = UDim2.new(0, 12, 0, 110)
+sizeLabel.Position = UDim2.new(0, 12, 0, 139)
 sizeLabel.BackgroundTransparency = 1
 sizeLabel.Text = "TAMAÑO FOV"
 sizeLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -143,7 +144,7 @@ sizeLabel.Parent = mainFrame
 
 local sizeInput = Instance.new("TextBox")
 sizeInput.Size = UDim2.new(0, 54, 0, 26)
-sizeInput.Position = UDim2.new(1, -66, 0, 110)
+sizeInput.Position = UDim2.new(1, -66, 0, 139)
 sizeInput.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 sizeInput.Text = tostring(_G.AutoShootFovSize)
 sizeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -155,7 +156,7 @@ Instance.new("UICorner", sizeInput).CornerRadius = UDim.new(0, 6)
 
 local hideButton = Instance.new("TextButton")
 hideButton.Size = UDim2.new(1, -24, 0, 24)
-hideButton.Position = UDim2.new(0, 12, 0, 148)
+hideButton.Position = UDim2.new(0, 12, 0, 178)
 hideButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 hideButton.Text = "HIDE INVISIBLE: OFF"
 hideButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -166,7 +167,7 @@ Instance.new("UICorner", hideButton).CornerRadius = UDim.new(0, 6)
 
 local destroyButton = Instance.new("TextButton")
 destroyButton.Size = UDim2.new(1, -24, 0, 24)
-destroyButton.Position = UDim2.new(0, 12, 0, 178)
+destroyButton.Position = UDim2.new(0, 12, 0, 210)
 destroyButton.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
 destroyButton.Text = "DESTROY SCRIPT"
 destroyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -205,7 +206,6 @@ local isHiddenInvisible = false
 iconButton.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     mainFrame.Visible = not isMinimized
-    
     if not isHiddenInvisible then
         stroke.Color = isMinimized and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(255, 255, 255)
     end
@@ -213,7 +213,6 @@ end)
 
 hideButton.MouseButton1Click:Connect(function()
     isHiddenInvisible = not isHiddenInvisible
-    
     if isHiddenInvisible then
         iconButton.BackgroundTransparency = 1
         iconButton.TextTransparency = 1
@@ -227,7 +226,6 @@ hideButton.MouseButton1Click:Connect(function()
         hideButton.Text = "HIDE INVISIBLE: OFF"
         hideButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     end
-    
     isMinimized = true
     mainFrame.Visible = false
 end)
@@ -241,6 +239,13 @@ autoShootTrack.MouseButton1Click:Connect(function()
     end
     TweenService:Create(autoShootKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
     TweenService:Create(autoShootTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
+end)
+
+autoEquipTrack.MouseButton1Click:Connect(function()
+    getgenv().AstraAutoEquipActive = not getgenv().AstraAutoEquipActive
+    local isON = getgenv().AstraAutoEquipActive
+    TweenService:Create(autoEquipKnob, TweenInfo.new(0.2), {Position = isON and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8)}):Play()
+    TweenService:Create(autoEquipTrack, TweenInfo.new(0.2), {BackgroundColor3 = isON and Color3.fromRGB(76, 175, 80) or Color3.fromRGB(45, 45, 45)}):Play()
 end)
 
 fovTrack.MouseButton1Click:Connect(function()
@@ -263,10 +268,23 @@ end)
 
 destroyButton.MouseButton1Click:Connect(function()
     getgenv().AstraAutoShotActive = false
+    getgenv().AstraAutoEquipActive = false
     getgenv().AstraTargetPart = nil
     pcall(function() aroAutoShootFov:Remove() end)
     if screenGui then screenGui:Destroy() end
 end)
+
+-- Validador basado en la estructura de la pistola ("fire") y evitando cuchillos ("Slash")
+local function esPistolaValida(tool)
+    if not tool or not tool:IsA("Tool") then return false end
+    if tool:FindFirstChild("fire") and tool.fire:IsA("RemoteEvent") then
+        return true
+    end
+    if tool:FindFirstChild("Slash") or tool:FindFirstChild("FlingKnifeEvent") then
+        return false
+    end
+    return false
+end
 
 task.spawn(function()
     local params = RaycastParams.new()
@@ -285,6 +303,7 @@ task.spawn(function()
 
     while screenGui.Parent do
         task.wait(0.15)
+
         if not getgenv().AstraAutoShotActive then
             getgenv().AstraTargetPart = nil
             isShootingVisual = false
@@ -294,13 +313,10 @@ task.spawn(function()
         local char = LocalPlayer.Character
         if not char or not char:FindFirstChild("HumanoidRootPart") then continue end
 
-        local arma = char:FindFirstChildOfClass("Tool")
-        if not arma or not arma:FindFirstChild("Handle") then 
-            getgenv().AstraTargetPart = nil
-            isShootingVisual = false
-            continue 
-        end
+        local humanoid = char:FindFirstChildOfClass("Humanoid")
+        if not humanoid or humanoid.Health <= 0 then continue end
 
+        local backpack = LocalPlayer:FindFirstChildOfClass("Backpack")
         local closestTargetPart = nil
         local shortestDistance = math.huge
         local myPos = char.HumanoidRootPart.Position
@@ -348,23 +364,45 @@ task.spawn(function()
             end
         end
         
+        local armaActual = char:FindFirstChildOfClass("Tool")
+        if armaActual and not esPistolaValida(armaActual) then
+            armaActual = nil
+        end
+
+        -- Si el AUTOSHOOT encuentra un enemigo válido directamente en la mira sin paredes
         if closestTargetPart then
             getgenv().AstraTargetPart = closestTargetPart
             
-            -- Activa la señal visual verde sincronizada con el disparo exacto
-            isShootingVisual = true
-            pcall(function() 
-                arma:Activate() 
-                task.delay(0.05, function() 
-                    if arma.Parent == char then arma:Deactivate() end
-                    isShootingVisual = false
+            -- SOLO SI el toggle AUTO EQUIP está activado y no tenemos la pistola en mano, la sacamos de la mochila
+            if getgenv().AstraAutoEquipActive and not armaActual and backpack then
+                for _, item in ipairs(backpack:GetChildren()) do
+                    if esPistolaValida(item) then
+                        humanoid:EquipTool(item)
+                        armaActual = item
+                        break
+                    end
+                end
+            end
+
+            -- Si ya tenemos la pistola equipada (ya sea por auto-equip o de forma manual), disparamos instantáneamente
+            if armaActual and armaActual:FindFirstChild("Handle") then
+                isShootingVisual = true
+                pcall(function() 
+                    armaActual:Activate() 
+                    task.delay(0.05, function() 
+                        if armaActual.Parent == char then armaActual:Deactivate() end
+                        isShootingVisual = false
+                    end)
                 end)
-            end)
-            
-            task.wait(0.15)
+            end
         else
             getgenv().AstraTargetPart = nil
             isShootingVisual = false
+
+            -- Si no hay enemigos en la mira y el Auto Equip está activo, guardamos la pistola de vuelta
+            if getgenv().AstraAutoEquipActive and armaActual and backpack and esPistolaValida(armaActual) then
+                armaActual.Parent = backpack
+            end
         end
     end
 end)
@@ -375,7 +413,6 @@ RunService.RenderStepped:Connect(function()
         aroAutoShootFov.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
         aroAutoShootFov.Radius = _G.AutoShootFovSize
         
-        -- Cambia el FOV a verde cuando dispara, y blanco por defecto
         if isShootingVisual then
             aroAutoShootFov.Color = Color3.fromRGB(0, 255, 100)
         else
