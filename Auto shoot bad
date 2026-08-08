@@ -1,4 +1,4 @@
--- Autoshoot BangGang
+--Auto Shoot BangGang
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
