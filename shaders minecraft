@@ -1,0 +1,437 @@
+{
+  "replacement_rules": [
+    {
+      "name": "cuchillo_default",
+      "replace_ids": [ 584555920 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/netherite_sword.png"
+    },
+    {
+      "name": "acuchillasion",
+      "replace_ids": [ 142247768 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/hit2.ogg"
+    },
+    {
+      "name": "totem confeti",
+      "replace_ids": [ 8304443672 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/use_totem.ogg"
+    },
+    {
+      "name": ",,,,,",
+      "replace_ids": [ 7933571710 ],
+      "mode": "id",
+      "enabled": true
+    },
+    {
+      "name": "cambio de arma",
+      "replace_ids": [ 169799883 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/hat.ogg"
+    },
+    {
+      "name": "win",
+      "replace_ids": [ 113599363914218 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/challenge_complete.ogg"
+    },
+    {
+      "name": "disparo",
+      "replace_ids": [ 10209803 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/shoot1.ogg"
+    },
+    {
+      "name": "corazon enderman",
+      "replace_ids": [ 18961980137 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/death_endermaan.ogg"
+    },
+    {
+      "name": "enderman dead effect heart",
+      "replace_ids": [ 84840525397695 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Enderman_BE.webp"
+    },
+    {
+      "name": "acertar disparo",
+      "replace_ids": [ 296102734 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/hit2.ogg"
+    },
+    {
+      "name": "espectador",
+      "replace_ids": [ 118311456954456 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/ender_eye.png"
+    },
+    {
+      "name": "oro gold nugget",
+      "replace_ids": [ 109755583540636 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/gold_nugget.png"
+    },
+    {
+      "name": "oro",
+      "replace_ids": [ 123768744710178 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/gold_nugget.png"
+    },
+    {
+      "name": "oro",
+      "replace_ids": [ 140177108894914 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/gold_nugget.png"
+    },
+    {
+      "name": "confeti totemmmmm",
+      "replace_ids": [ 108505632837799 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/totem_of_undying.png"
+    },
+    {
+      "name": "zomvie dinero",
+      "replace_ids": [ 103800630555365 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Zombie_JE3_BE2.webp"
+    },
+    {
+      "name": "zombie muerto",
+      "replace_ids": [ 91318974453588 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/Zombie%20Death%20(Minecraft%20Sound)%20-%20Sound%20Effect%20for%20editing(MP3_320K).mp3"
+    },
+    {
+      "name": "arco arma",
+      "replace_ids": [ 92392476914203 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/bow.png"
+    },
+    {
+      "name": "espada de madera",
+      "replace_ids": [ 107969586413592 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Wooden_Sword_JE2_BE2.png"
+    },
+    {
+      "name": "fence",
+      "replace_ids": [ 5025781662 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/4055663567.webp"
+    },
+    {
+      "name": "crafteo",
+      "replace_ids": [ 93737657291746 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Crafting_Table_JE4_BE3.webp"
+    },
+    {
+      "name": "gold",
+      "replace_ids": [ 105671231314894 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/gold_nugget.png"
+    },
+    {
+      "name": "cofre",
+      "replace_ids": [ 95370834744493 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/03f75825ed25af223ce985ebf296320d.jpg"
+    },
+    {
+      "name": "trade",
+      "replace_ids": [ 106282543822077 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Plains_Villager_Base.webp"
+    },
+    {
+      "name": "clanes",
+      "replace_ids": [ 86926519453320 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Shield_JE2_BE1.webp"
+    },
+    {
+      "name": "tienda",
+      "replace_ids": [ 86187489237388 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/diamond.png"
+    },
+    {
+      "name": "peismarine",
+      "replace_ids": [ 17429458668 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/asdasd.jpg"
+    },
+    {
+      "name": "madera",
+      "replace_ids": [ 7547332968 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/oaks%20planks%20x4.png"
+    },
+    {
+      "name": "ladrillos piedra",
+      "replace_ids": [ 9873322398 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/stone_bricks.png"
+    },
+    {
+      "name": "cobblestone",
+      "replace_ids": [ 7546652947 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/cobblestoneee.jpg"
+    },
+    {
+      "name": "tejas",
+      "replace_ids": [ 18147685875 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/mud_bricks.png"
+    },
+    {
+      "name": "cuarzo",
+      "replace_ids": [ 14108675388 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/quartz_bricks.png"
+    },
+    {
+      "name": "lana",
+      "replace_ids": [ 7547101130 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/ef85b926-6499-4ec5-8bc6-488d8db9c537.jpg"
+    },
+    {
+      "name": "ladrillos",
+      "replace_ids": [ 91579661064923 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/dccabff5-e1d6-481c-8f7a-ca5a8ac15482.jpg"
+    },
+    {
+      "name": "lanaaaaa",
+      "replace_ids": [ 14108663921 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/ef85b926-6499-4ec5-8bc6-488d8db9c537.jpg"
+    },
+    {
+      "name": "awdawd",
+      "replace_ids": [ 7547169285 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/grass_block_top.png"
+    },
+    {
+      "name": "ñeaces",
+      "replace_ids": [ 9873288083 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/sr20e9586133aaf.webp"
+    },
+    {
+      "name": "mnadera",
+      "replace_ids": [ 7547303225 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/oaks%20planks%20x4.png"
+    },
+    {
+      "name": "iron",
+      "replace_ids": [ 7547288171 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/iron_block.png"
+    },
+    {
+      "name": "piedra",
+      "replace_ids": [ 7547298114 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/stoneeeee.jpg"
+    },
+    {
+      "name": "pantalla de carga duels",
+      "replace_ids": [ 112295185901220 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/%C2%B4pantalla%20de%20carga%20duels.png"
+    },
+    {
+      "name": "arena",
+      "replace_ids": [ 9438851661 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/sand.png"
+    },
+    {
+      "name": "stonee",
+      "replace_ids": [ 9438413638 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/stoneeeee.jpg"
+    },
+    {
+      "name": "ladrillos",
+      "replace_ids": [ 7546650097 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/dccabff5-e1d6-481c-8f7a-ca5a8ac15482.jpg"
+    },
+    {
+      "name": "marmol calcite",
+      "replace_ids": [ 7547177270 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/calcite.png"
+    },
+    {
+      "name": "marmolll",
+      "replace_ids": [ 14108671010 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/calcite.png"
+    },
+    {
+      "name": "diorita",
+      "replace_ids": [ 9873319819 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/stoneeeee.jpg"
+    },
+    {
+      "name": "arena",
+      "replace_ids": [ 7547295153 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/sand.png"
+    },
+    {
+      "name": "diorita",
+      "replace_ids": [ 7546653951 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/stoneeeee.jpg"
+    },
+    {
+      "name": "craftin table",
+      "replace_ids": [ 93737657291746 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Crafting_Table_JE4_BE3.webp"
+    },
+    {
+      "name": "golpe totem",
+      "replace_ids": [ 6335911565 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/successful_hit.ogg"
+    },
+    {
+      "name": "efectos agua",
+      "replace_ids": [ 120499977478795 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/Water_Bottle_JE2_BE2.webp"
+    },
+    {
+      "name": "diamante cuchillo",
+      "replace_ids": [ 107969586413592 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/diamond.png"
+    },
+    {
+      "name": "diorita",
+      "replace_ids": [ 7547291361 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/stoneeeee.jpg"
+    },
+    {
+      "name": "dot",
+      "replace_ids": [ 114987734743262 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/26691.png"
+    },
+    {
+      "name": "fabrica",
+      "replace_ids": [ 124619498071358 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/file_000000008e7c71f596f44576f0ce2d09.png"
+    },
+    {
+      "name": "mill",
+      "replace_ids": [ 85706041259427 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/file_000000008d34720e81970b207f85d893.png"
+    },
+    {
+      "name": "gotel",
+      "replace_ids": [ 109043775556196 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/file_000000009e6071f58e71e2a29eb7cfd6.png"
+    },
+    {
+      "name": "pool",
+      "replace_ids": [ 116086814045417 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/file_00000000d130720e83bd4f48f5a8681b.png"
+    },
+    {
+      "name": "dragon roar",
+      "replace_ids": [ 93495868540102 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://github.com/Galaaa1103/Duels_minecraft/raw/refs/heads/main/growl4.ogg"
+    },
+    {
+      "name": "dragob",
+      "replace_ids": [ 139488326961899 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/DragonHead.webp"
+    },
+    {
+      "name": "grafiti",
+      "replace_ids": [ 102121265713036 ],
+      "mode": "cdn",
+      "enabled": true,
+      "cdn_url": "https://raw.githubusercontent.com/Galaaa1103/Duels_minecraft/refs/heads/main/%C2%B4pantalla%20de%20carga%20duels.png"
+    }
+  ]
+}
