@@ -484,16 +484,16 @@ Black=Color3.new(0,0,0),
 
 Dialog="Accent",
 
-Background=Color3.fromHex"#030303",
+Background="Accent",
 BackgroundTransparency=0,
 Hover="Text",
 
-PanelBackground=Color3.fromHex"#050505",
-PanelBackgroundTransparency=0,
+PanelBackground="White",
+PanelBackgroundTransparency=0.95,
 
-WindowBackground=Color3.fromHex"#030303",
+WindowBackground="Background",
 
-WindowShadow=Color3.fromHex"#000000",
+WindowShadow="Black",
 
 
 WindowTopbarTitle="Text",
@@ -502,13 +502,13 @@ WindowTopbarIcon="Icon",
 WindowTopbarButtonIcon="Icon",
 
 
-WindowSearchBarBackground=Color3.fromHex"#080808",
+WindowSearchBarBackground="Dialog",
 
-TabBackground=Color3.fromHex"#080808",
-TabBackgroundHover=Color3.fromHex"#151515",
-TabBackgroundHoverTransparency=0,
-TabBackgroundActive=Color3.fromHex"#1B1B1B",
-TabBackgroundActiveTransparency=0,
+TabBackground="Hover",
+TabBackgroundHover="Hover",
+TabBackgroundHoverTransparency=0.97,
+TabBackgroundActive="Hover",
+TabBackgroundActiveTransparency=0.93,
 TabText="Text",
 TabTextTransparency=0.3,
 TabTextTransparencyActive=0,
@@ -516,13 +516,13 @@ TabTitle="Text",
 TabIcon="Icon",
 TabIconTransparency=0.4,
 TabIconTransparencyActive=0.1,
-TabBorderTransparency=0.72,
-TabBorderTransparencyActive=0.15,
-TabBorder=Color3.fromHex"#FFFFFF",
+TabBorderTransparency=1,
+TabBorderTransparencyActive=0.75,
+TabBorder="White",
 
-ElementBackground=Color3.fromHex"#0B0B0B",
-ElementBackgroundTransparency=0,
-ElementBackgroundHover=Color3.fromHex"#171717",
+ElementBackground="Text",
+ElementBackgroundTransparency=0.93,
+ElementBackgroundHover=b:AddColor("ElementBackground","#ffffff",0.1),
 ElementTitle="Text",
 ElementDesc="Text",
 ElementIcon="Icon",
@@ -539,8 +539,8 @@ DialogTitle="Text",
 DialogContent="Text",
 DialogIcon="Icon",
 
-Toggle=Color3.fromHex"#FFFFFF",
-ToggleBar=Color3.fromHex"#FFFFFF",
+Toggle="Button",
+ToggleBar="White",
 
 Checkbox="Primary",
 CheckboxIcon="White",
@@ -559,7 +559,7 @@ ProgressBarTrack="Text",
 ProgressBarTrackTransparency=0.9,
 ProgressBarText="Text",
 
-Tooltip=Color3.fromHex"#101010",
+Tooltip=Color3.fromHex"4C4C4C",
 TooltipText="White",
 TooltipSecondary="Primary",
 TooltipSecondaryText="White",
@@ -570,12 +570,12 @@ SectionIcon="Icon",
 
 SectionExpandIcon="Icon",
 SectionExpandIconTransparency=0.4,
-SectionBox=Color3.fromHex"#FFFFFF",
-SectionBoxTransparency=0.88,
-SectionBoxBorder=Color3.fromHex"#FFFFFF",
-SectionBoxBorderTransparency=0.55,
-SectionBoxBackground=Color3.fromHex"#080808",
-SectionBoxBackgroundTransparency=0,
+SectionBox="Text",
+SectionBoxTransparency=0.95,
+SectionBoxBorder="White",
+SectionBoxBorderTransparency=0.75,
+SectionBoxBackground="Text",
+SectionBoxBackgroundTransparency=0.97,
 
 SearchBarBorder="White",
 SearchBarBorderTransparency=0.75,
@@ -596,8 +596,8 @@ DropdownTabBorder="White",
 DropdownTabBackground="ElementBackground",
 DropdownBackground="Background",
 
-LabelBackground=Color3.fromHex"#0B0B0B",
-LabelBackgroundTransparency=0,
+LabelBackground="White",
+LabelBackgroundTransparency=0.95,
 
 ViewportBackground="ElementBackground",
 ViewportBackgroundTransparency="ElementBackgroundTransparency",
@@ -4404,68 +4404,48 @@ Icon=Color3.fromHex"#ffffff",
 },
 }
 
--- Global ULTRA BLACK theme normalization.
--- Every selectable palette is retained as a choice, but visual surfaces and controls
--- remain monochrome so changing Dark/Violet/Crimson/Rainbow/Rose cannot recolor them.
-local BLACK = Color3.fromHex"#030303"
-local SURFACE = Color3.fromHex"#080808"
-local CARD = Color3.fromHex"#0D0D0D"
-local HOVER = Color3.fromHex"#171717"
-local WHITE = Color3.fromHex"#FFFFFF"
-local MUTED = Color3.fromHex"#929292"
-
-for _, theme in pairs(themes) do
-    theme.Accent = SURFACE
-    theme.Dialog = SURFACE
-    theme.Background = BLACK
-    theme.Button = SURFACE
-    theme.Primary = WHITE
-    theme.PanelBackground = BLACK
-    theme.PanelBackgroundTransparency = 0
-    theme.WindowBackground = BLACK
-    theme.WindowShadow = Color3.fromHex"#000000"
-
-    theme.Text = WHITE
-    theme.Placeholder = MUTED
-    theme.Icon = WHITE
-
-    theme.ElementBackground = CARD
-    theme.ElementBackgroundTransparency = 0
-    theme.ElementBackgroundHover = HOVER
-
-    theme.TabBackground = SURFACE
-    theme.TabBackgroundHover = HOVER
-    theme.TabBackgroundHoverTransparency = 0
-    theme.TabBackgroundActive = Color3.fromHex"#1D1D1D"
-    theme.TabBackgroundActiveTransparency = 0
-    theme.TabBorder = WHITE
-    theme.TabBorderTransparency = 0.72
-    theme.TabBorderTransparencyActive = 0.12
-
-    -- White toggle tracks/knobs and outlines, regardless of selected palette.
-    theme.Toggle = WHITE
-    theme.ToggleBar = WHITE
-    theme.Checkbox = WHITE
-    theme.CheckboxIcon = BLACK
-    theme.CheckboxBorder = WHITE
-    theme.CheckboxBorderTransparency = 0
-    theme.Slider = WHITE
-    theme.SliderThumb = WHITE
-    theme.ProgressBar = WHITE
-
-    theme.SectionBox = WHITE
-    theme.SectionBoxTransparency = 0.88
-    theme.SectionBoxBorder = WHITE
-    theme.SectionBoxBorderTransparency = 0.55
-    theme.SectionBoxBackground = SURFACE
-    theme.SectionBoxBackgroundTransparency = 0
-
-    theme.LabelBackground = CARD
-    theme.LabelBackgroundTransparency = 0
-    theme.Tooltip = Color3.fromHex"#101010"
-    theme.TooltipText = WHITE
-    theme.SearchBarBorder = WHITE
-    theme.SearchBarBorderTransparency = 0.72
+-- XeroHub ULTRA BLACK redesign: palette names remain selectable, but all visual
+-- surfaces, text, borders and control accents stay monochrome in every palette.
+for _,theme in pairs(themes) do
+    local black=Color3.fromHex"#030303"
+    local panel=Color3.fromHex"#070707"
+    local surface=Color3.fromHex"#0D0D0D"
+    local hover=Color3.fromHex"#171717"
+    local white=Color3.fromHex"#F5F5F5"
+    local muted=Color3.fromHex"#929292"
+    theme.Accent=black; theme.Dialog=panel; theme.Background=black; theme.Outline=white
+    theme.WindowBackground=black; theme.PanelBackground=black
+    theme.PanelBackgroundTransparency=0; theme.WindowShadow=Color3.new(0,0,0)
+    theme.Button=surface; theme.ElementBackground=surface
+    theme.ElementBackgroundTransparency=0; theme.ElementBackgroundHover=hover
+    theme.TabBackground=black; theme.TabBackgroundHover=hover
+    theme.TabBackgroundHoverTransparency=0; theme.TabBackgroundActive=surface
+    theme.TabBackgroundActiveTransparency=0
+    theme.TabText=white; theme.TabTextTransparency=0.32
+    theme.TabTextTransparencyActive=0; theme.TabTitle=white
+    theme.TabIcon=white; theme.TabIconTransparency=0.28
+    theme.TabIconTransparencyActive=0; theme.TabBorder=white
+    theme.TabBorderTransparency=0.84; theme.TabBorderTransparencyActive=0.25
+    theme.Text=white; theme.Placeholder=muted; theme.Icon=white
+    theme.Primary=white; theme.Toggle=white; theme.ToggleBar=white
+    theme.Checkbox=white; theme.CheckboxIcon=black; theme.CheckboxBorder=white
+    theme.Slider=white; theme.SliderThumb=white; theme.SliderIcon=white
+    theme.ProgressBar=white; theme.ProgressBarTrack=surface
+    theme.WindowTopbarTitle=white; theme.WindowTopbarAuthor=muted
+    theme.WindowTopbarIcon=white; theme.WindowTopbarButtonIcon=white
+    theme.WindowSearchBarBackground=surface
+    theme.SearchBarBorder=white; theme.SearchBarBorderTransparency=0.72
+    theme.DropdownBackground=panel; theme.DropdownTabBackground=surface
+    theme.DropdownTabBorder=white; theme.PopupBackground=panel
+    theme.DialogBackground=panel; theme.Tooltip=surface
+    theme.TooltipText=white; theme.TooltipSecondary=surface
+    theme.TooltipSecondaryText=white; theme.LabelBackground=surface
+    theme.LabelBackgroundTransparency=0; theme.SectionBox=surface
+    theme.SectionBoxTransparency=0; theme.SectionBoxBorder=white
+    theme.SectionBoxBorderTransparency=0.78
+    theme.SectionBoxBackground=panel; theme.SectionBoxBackgroundTransparency=0
+    theme.Notification=panel; theme.Notification2=surface
+    theme.NotificationBorder=white; theme.NotificationBorderTransparency=0.78
 end
 
 return themes
@@ -5342,26 +5322,26 @@ Scale=1,
 })
 
 local an=ac("Frame",{
-Size=UDim2.new(0,0,0,44),
+Size=UDim2.new(0,0,0,42),
 AutomaticSize="X",
 Parent=al,
 Active=false,
-BackgroundTransparency=.08,
+BackgroundTransparency=0,
 ZIndex=99,
-BackgroundColor3=Color3.fromHex"#080C12",
+BackgroundColor3=Color3.fromHex"#030303",
 },{
 am,
 ac("UICorner",{
-CornerRadius=UDim.new(1,0)
+CornerRadius=UDim.new(0,11)
 }),
 ac("UIStroke",{
-Thickness=1,
+Thickness=1.25,
 ApplyStrokeMode="Border",
-Color=Color3.fromHex"#8296B3",
+Color=Color3.fromHex"#F5F5F5",
 Transparency=0.38,
 },{
 ac("UIGradient",{
-Color=ColorSequence.new(Color3.fromHex"263448",Color3.fromHex"4B6F91")
+Color=ColorSequence.new(Color3.fromHex"#F5F5F5",Color3.fromHex"#F5F5F5")
 })
 }),
 aj,
@@ -5382,7 +5362,7 @@ Size=UDim2.new(0,0,0,36),
 BackgroundColor3=Color3.new(1,1,1),
 },{
 ac("UICorner",{
-CornerRadius=UDim.new(1,-4)
+CornerRadius=UDim.new(0,8)
 }),
 ah,
 ac("UIListLayout",{
@@ -5392,8 +5372,8 @@ VerticalAlignment="Center",
 }),
 ai,
 ac("UIPadding",{
-PaddingLeft=UDim.new(0,11),
-PaddingRight=UDim.new(0,11),
+PaddingLeft=UDim.new(0,13),
+PaddingRight=UDim.new(0,13),
 }),
 }),
 ac("UIPadding",{
@@ -5469,8 +5449,7 @@ OnlyMobile=aq.OnlyMobile,
 CornerRadius=aq.CornerRadius or UDim.new(1,0),
 StrokeThickness=aq.StrokeThickness or 2,
 Scale=aq.Scale or 1,
-Color=aq.Color
-or ColorSequence.new(Color3.fromHex"263448",Color3.fromHex"4B6F91"),
+Color=ColorSequence.new(Color3.fromHex"#F5F5F5",Color3.fromHex"#F5F5F5"),
 }
 
 
@@ -6678,11 +6657,12 @@ ImageTransparency=1,
 ab.NewRoundFrame(an,"SquircleOutline",{
 Size=UDim2.new(1,0,1,0),
 Name="Stroke",
-ImageColor3=Color3.new(1,1,1),
+ImageColor3=Color3.fromHex"#FFFFFF",
 ImageTransparency=0,
 },{
 ac("UIGradient",{
 Rotation=90,
+Color=ColorSequence.new(Color3.fromHex"#FFFFFF",Color3.fromHex"#FFFFFF"),
 Transparency=NumberSequence.new(0),
 }),
 }),
@@ -11815,6 +11795,17 @@ ImageColor3="Text",
 ImageTransparency=1,
 Name="Frame",
 },{
+al("Frame",{
+Name="UltraBlackActiveMark",
+Size=UDim2.new(0,3,1,-12),
+Position=UDim2.new(0,0,0.5,0),
+AnchorPoint=Vector2.new(0,0.5),
+BackgroundColor3=Color3.fromHex"#FFFFFF",
+BackgroundTransparency=0,
+BorderSizePixel=0,
+Visible=false,
+ZIndex=12,
+}, { al("UICorner",{CornerRadius=UDim.new(1,0)}) }),
 al("UIListLayout",{
 SortOrder="LayoutOrder",
 Padding=UDim.new(0,2+(Window.UIPadding/2)),
@@ -11852,6 +11843,8 @@ PaddingBottom=UDim.new(0,ar.TabPaddingY),
 }),
 }),
 },true)
+
+ar.UIElements.ActiveMark=ar.UIElements.Main.Frame:FindFirstChild("UltraBlackActiveMark")
 
 local at=0
 local au
@@ -12291,6 +12284,7 @@ ImageTransparency="TabIconTransparency",
 },0.15)
 end
 as.Selected=false
+if as.UIElements.ActiveMark then as.UIElements.ActiveMark.Visible=false end
 end
 end
 ak.SetThemeTag(ao.Tabs[aq].UIElements.Main,{
@@ -12311,6 +12305,7 @@ ImageTransparency="TabIconTransparencyActive",
 },0.15)
 end
 ao.Tabs[aq].Selected=true
+if ao.Tabs[aq].UIElements.ActiveMark then ao.Tabs[aq].UIElements.ActiveMark.Visible=true end
 
 task.spawn(function()
 for ar,as in next,ao.Containers do
@@ -13312,6 +13307,9 @@ PaddingBottom=UDim.new(0,aw.UIPadding/2),
 })
 
 aw.UIElements.SideBarContainer=ao("Frame",{
+BackgroundColor3=Color3.fromHex"#050505",
+BackgroundTransparency=0,
+BorderSizePixel=0,
 Size=UDim2.new(
 0,
 aw.SideBarWidth,
@@ -13319,7 +13317,7 @@ aw.SideBarWidth,
 aw.User.Enabled and-aw.Topbar.Height-42-(aw.UIPadding*2)or-aw.Topbar.Height
 ),
 Position=UDim2.new(0,0,0,aw.Topbar.Height),
-BackgroundTransparency=1,
+BackgroundTransparency=0,
 Visible=true,
 },{
 ao("Frame",{
@@ -13330,6 +13328,8 @@ Position=UDim2.new(0,0,1,-aw.UIPadding/2),
 AnchorPoint=Vector2.new(0,1),
 }),
 aw.UIElements.SideBar,
+ao("UICorner",{CornerRadius=UDim.new(0,14)}),
+ao("UIStroke",{Color=Color3.fromHex"#FFFFFF",Thickness=1,Transparency=0.84,ApplyStrokeMode="Border"}),
 })
 
 if aw.ScrollBarEnabled then
@@ -13352,7 +13352,7 @@ an.NewRoundFrame(aw.UICorner-(aw.UIPadding/2),"Squircle",{
 Size=UDim2.new(1,0,1,0),
 ThemeTag={
 ImageColor3="PanelBackground",
-ImageTransparency="PanelBackgroundTransparency",
+ImageTransparency=0,
 },
 
 
@@ -13768,7 +13768,7 @@ BackgroundTransparency=1,
 AutomaticSize="XY",
 Name="Title",
 TextXAlignment="Left",
-TextSize=16,
+TextSize=19,
 ThemeTag={
 TextColor3="WindowTopbarTitle",
 },
@@ -13798,6 +13798,14 @@ ImageColor3="WindowBackground",
 
 },{
 i,
+ao("Frame",{
+    Name="UltraBlackImageWash",
+    Size=UDim2.new(1,0,1,0),
+    BackgroundColor3=Color3.fromHex"#000000",
+    BackgroundTransparency=0.58,
+    BorderSizePixel=0,
+    ZIndex=2,
+}, { ao("UICorner",{CornerRadius=UDim.new(0,aw.UICorner)}) }),
 r,
 az,
 }),
@@ -13924,6 +13932,14 @@ aw.Topbar.ButtonsType=="Default"and aw.UIPadding or aw.UIPadding-2
 ),
 PaddingRight=UDim.new(0,8),
 PaddingBottom=UDim.new(0,aw.UIPadding),
+}),
+ao("Frame",{
+Name="UltraBlackTopbarDivider",
+Size=UDim2.new(1,-(aw.UIPadding*2),0,1),
+Position=UDim2.new(0,aw.UIPadding,1,-1),
+BackgroundColor3=Color3.fromHex"#FFFFFF",
+BackgroundTransparency=0.88,
+BorderSizePixel=0,
 }),
 }),
 }),
