@@ -484,16 +484,16 @@ Black=Color3.new(0,0,0),
 
 Dialog="Accent",
 
-Background="Accent",
+Background=Color3.fromHex"#030303",
 BackgroundTransparency=0,
 Hover="Text",
 
-PanelBackground="White",
-PanelBackgroundTransparency=0.95,
+PanelBackground=Color3.fromHex"#050505",
+PanelBackgroundTransparency=0,
 
-WindowBackground="Background",
+WindowBackground=Color3.fromHex"#030303",
 
-WindowShadow="Black",
+WindowShadow=Color3.fromHex"#000000",
 
 
 WindowTopbarTitle="Text",
@@ -502,13 +502,13 @@ WindowTopbarIcon="Icon",
 WindowTopbarButtonIcon="Icon",
 
 
-WindowSearchBarBackground="Dialog",
+WindowSearchBarBackground=Color3.fromHex"#080808",
 
-TabBackground="Hover",
-TabBackgroundHover="Hover",
-TabBackgroundHoverTransparency=0.97,
-TabBackgroundActive="Hover",
-TabBackgroundActiveTransparency=0.93,
+TabBackground=Color3.fromHex"#080808",
+TabBackgroundHover=Color3.fromHex"#151515",
+TabBackgroundHoverTransparency=0,
+TabBackgroundActive=Color3.fromHex"#1B1B1B",
+TabBackgroundActiveTransparency=0,
 TabText="Text",
 TabTextTransparency=0.3,
 TabTextTransparencyActive=0,
@@ -516,13 +516,13 @@ TabTitle="Text",
 TabIcon="Icon",
 TabIconTransparency=0.4,
 TabIconTransparencyActive=0.1,
-TabBorderTransparency=1,
-TabBorderTransparencyActive=0.75,
-TabBorder="White",
+TabBorderTransparency=0.72,
+TabBorderTransparencyActive=0.15,
+TabBorder=Color3.fromHex"#FFFFFF",
 
-ElementBackground="Text",
-ElementBackgroundTransparency=0.93,
-ElementBackgroundHover=b:AddColor("ElementBackground","#ffffff",0.1),
+ElementBackground=Color3.fromHex"#0B0B0B",
+ElementBackgroundTransparency=0,
+ElementBackgroundHover=Color3.fromHex"#171717",
 ElementTitle="Text",
 ElementDesc="Text",
 ElementIcon="Icon",
@@ -539,8 +539,8 @@ DialogTitle="Text",
 DialogContent="Text",
 DialogIcon="Icon",
 
-Toggle="Button",
-ToggleBar="White",
+Toggle=Color3.fromHex"#FFFFFF",
+ToggleBar=Color3.fromHex"#FFFFFF",
 
 Checkbox="Primary",
 CheckboxIcon="White",
@@ -559,7 +559,7 @@ ProgressBarTrack="Text",
 ProgressBarTrackTransparency=0.9,
 ProgressBarText="Text",
 
-Tooltip=Color3.fromHex"4C4C4C",
+Tooltip=Color3.fromHex"#101010",
 TooltipText="White",
 TooltipSecondary="Primary",
 TooltipSecondaryText="White",
@@ -570,12 +570,12 @@ SectionIcon="Icon",
 
 SectionExpandIcon="Icon",
 SectionExpandIconTransparency=0.4,
-SectionBox="Text",
-SectionBoxTransparency=0.95,
-SectionBoxBorder="White",
-SectionBoxBorderTransparency=0.75,
-SectionBoxBackground="Text",
-SectionBoxBackgroundTransparency=0.97,
+SectionBox=Color3.fromHex"#FFFFFF",
+SectionBoxTransparency=0.88,
+SectionBoxBorder=Color3.fromHex"#FFFFFF",
+SectionBoxBorderTransparency=0.55,
+SectionBoxBackground=Color3.fromHex"#080808",
+SectionBoxBackgroundTransparency=0,
 
 SearchBarBorder="White",
 SearchBarBorderTransparency=0.75,
@@ -596,8 +596,8 @@ DropdownTabBorder="White",
 DropdownTabBackground="ElementBackground",
 DropdownBackground="Background",
 
-LabelBackground="White",
-LabelBackgroundTransparency=0.95,
+LabelBackground=Color3.fromHex"#0B0B0B",
+LabelBackgroundTransparency=0,
 
 ViewportBackground="ElementBackground",
 ViewportBackgroundTransparency="ElementBackgroundTransparency",
@@ -4404,41 +4404,68 @@ Icon=Color3.fromHex"#ffffff",
 },
 }
 
--- Global Obsidian Black override: keep every named palette selectable,
--- but make the interface surfaces consistently near-black.
-for _,theme in pairs(themes) do
-    theme.Accent=Color3.fromHex"#080808"
-    theme.Dialog=Color3.fromHex"#090909"
-    theme.Background=Color3.fromHex"#030303"
-    theme.Button=Color3.fromHex"#111111"
-    theme.PanelBackground=Color3.fromHex"#050505"
-    theme.PanelBackgroundTransparency=0
-    theme.WindowBackground=Color3.fromHex"#030303"
-    theme.WindowShadow=Color3.fromHex"#000000"
-    theme.ElementBackground=Color3.fromHex"#0D0D0D"
-    theme.ElementBackgroundTransparency=0
-    theme.ElementBackgroundHover=Color3.fromHex"#191919"
-    theme.TabBackground=Color3.fromHex"#080808"
-    theme.TabBackgroundHover=Color3.fromHex"#151515"
-    theme.TabBackgroundHoverTransparency=0
-    theme.TabBackgroundActive=Color3.fromHex"#202020"
-    theme.TabBackgroundActiveTransparency=0
-    theme.TabBorder=Color3.fromHex"#777777"
-    theme.TabBorderTransparency=0.72
-    theme.TabBorderTransparencyActive=0.25
-    theme.Text=Color3.fromHex"#F5F5F5"
-    theme.Placeholder=Color3.fromHex"#858585"
-    theme.Icon=Color3.fromHex"#EAEAEA"
-    theme.Toggle=Color3.fromHex"#FFFFFF"
-    theme.ToggleBar=Color3.fromHex"#FFFFFF"
-    theme.Checkbox=Color3.fromHex"#FFFFFF"
-    theme.CheckboxIcon=Color3.fromHex"#050505"
-    theme.CheckboxBorder=Color3.fromHex"#FFFFFF"
-    theme.Primary=Color3.fromHex"#FFFFFF"
-    theme.Slider=Color3.fromHex"#FFFFFF"
-    theme.SliderThumb=Color3.fromHex"#FFFFFF"
-    theme.ProgressBar=Color3.fromHex"#FFFFFF"
-    theme.Tooltip=Color3.fromHex"#111111"
+-- Global ULTRA BLACK theme normalization.
+-- Every selectable palette is retained as a choice, but visual surfaces and controls
+-- remain monochrome so changing Dark/Violet/Crimson/Rainbow/Rose cannot recolor them.
+local BLACK = Color3.fromHex"#030303"
+local SURFACE = Color3.fromHex"#080808"
+local CARD = Color3.fromHex"#0D0D0D"
+local HOVER = Color3.fromHex"#171717"
+local WHITE = Color3.fromHex"#FFFFFF"
+local MUTED = Color3.fromHex"#929292"
+
+for _, theme in pairs(themes) do
+    theme.Accent = SURFACE
+    theme.Dialog = SURFACE
+    theme.Background = BLACK
+    theme.Button = SURFACE
+    theme.Primary = WHITE
+    theme.PanelBackground = BLACK
+    theme.PanelBackgroundTransparency = 0
+    theme.WindowBackground = BLACK
+    theme.WindowShadow = Color3.fromHex"#000000"
+
+    theme.Text = WHITE
+    theme.Placeholder = MUTED
+    theme.Icon = WHITE
+
+    theme.ElementBackground = CARD
+    theme.ElementBackgroundTransparency = 0
+    theme.ElementBackgroundHover = HOVER
+
+    theme.TabBackground = SURFACE
+    theme.TabBackgroundHover = HOVER
+    theme.TabBackgroundHoverTransparency = 0
+    theme.TabBackgroundActive = Color3.fromHex"#1D1D1D"
+    theme.TabBackgroundActiveTransparency = 0
+    theme.TabBorder = WHITE
+    theme.TabBorderTransparency = 0.72
+    theme.TabBorderTransparencyActive = 0.12
+
+    -- White toggle tracks/knobs and outlines, regardless of selected palette.
+    theme.Toggle = WHITE
+    theme.ToggleBar = WHITE
+    theme.Checkbox = WHITE
+    theme.CheckboxIcon = BLACK
+    theme.CheckboxBorder = WHITE
+    theme.CheckboxBorderTransparency = 0
+    theme.Slider = WHITE
+    theme.SliderThumb = WHITE
+    theme.ProgressBar = WHITE
+
+    theme.SectionBox = WHITE
+    theme.SectionBoxTransparency = 0.88
+    theme.SectionBoxBorder = WHITE
+    theme.SectionBoxBorderTransparency = 0.55
+    theme.SectionBoxBackground = SURFACE
+    theme.SectionBoxBackgroundTransparency = 0
+
+    theme.LabelBackground = CARD
+    theme.LabelBackgroundTransparency = 0
+    theme.Tooltip = Color3.fromHex"#101010"
+    theme.TooltipText = WHITE
+    theme.SearchBarBorder = WHITE
+    theme.SearchBarBorderTransparency = 0.72
 end
 
 return themes
