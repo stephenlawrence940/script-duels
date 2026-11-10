@@ -8,7 +8,9 @@
     
     To view the source code, see the `src/` folder on the official GitHub repository.
     
-    Author: JesúsHub
+    Author: Footagesus (Footages, .ftgs, oftgs)
+    Github: https://github.com/Footagesus/WindUI
+    Discord: https://discord.gg/ftgs-development-hub-1300692552005189632
     License: MIT
 ]]
 
@@ -4007,7 +4009,7 @@ end
 
 return aa end function a.v()
 return function(aa,ab)
-return{
+local themes={
 Dark={
 Name="Dark",
 
@@ -4401,6 +4403,45 @@ Button=aa:Gradient({
 Icon=Color3.fromHex"#ffffff",
 },
 }
+
+-- Global Obsidian Black override: keep every named palette selectable,
+-- but make the interface surfaces consistently near-black.
+for _,theme in pairs(themes) do
+    theme.Accent=Color3.fromHex"#080808"
+    theme.Dialog=Color3.fromHex"#090909"
+    theme.Background=Color3.fromHex"#030303"
+    theme.Button=Color3.fromHex"#111111"
+    theme.PanelBackground=Color3.fromHex"#050505"
+    theme.PanelBackgroundTransparency=0
+    theme.WindowBackground=Color3.fromHex"#030303"
+    theme.WindowShadow=Color3.fromHex"#000000"
+    theme.ElementBackground=Color3.fromHex"#0D0D0D"
+    theme.ElementBackgroundTransparency=0
+    theme.ElementBackgroundHover=Color3.fromHex"#191919"
+    theme.TabBackground=Color3.fromHex"#080808"
+    theme.TabBackgroundHover=Color3.fromHex"#151515"
+    theme.TabBackgroundHoverTransparency=0
+    theme.TabBackgroundActive=Color3.fromHex"#202020"
+    theme.TabBackgroundActiveTransparency=0
+    theme.TabBorder=Color3.fromHex"#777777"
+    theme.TabBorderTransparency=0.72
+    theme.TabBorderTransparencyActive=0.25
+    theme.Text=Color3.fromHex"#F5F5F5"
+    theme.Placeholder=Color3.fromHex"#858585"
+    theme.Icon=Color3.fromHex"#EAEAEA"
+    theme.Toggle=Color3.fromHex"#FFFFFF"
+    theme.ToggleBar=Color3.fromHex"#FFFFFF"
+    theme.Checkbox=Color3.fromHex"#FFFFFF"
+    theme.CheckboxIcon=Color3.fromHex"#050505"
+    theme.CheckboxBorder=Color3.fromHex"#FFFFFF"
+    theme.Primary=Color3.fromHex"#FFFFFF"
+    theme.Slider=Color3.fromHex"#FFFFFF"
+    theme.SliderThumb=Color3.fromHex"#FFFFFF"
+    theme.ProgressBar=Color3.fromHex"#FFFFFF"
+    theme.Tooltip=Color3.fromHex"#111111"
+end
+
+return themes
 end end function a.w()
 
 local aa={}
@@ -6588,9 +6629,10 @@ Parent=ai,
 })
 
 local aq=ab.NewRoundFrame(an,"Squircle",{
-ImageTransparency=0.85,
+ImageTransparency=0.12,
+ImageColor3=Color3.fromHex"#080808",
 ThemeTag={
-ImageColor3="Text",
+ImageColor3="Background",
 },
 Parent=ap,
 Size=UDim2.new(0,ak and(52)or(40.8),0,24),
@@ -6610,14 +6652,11 @@ ab.NewRoundFrame(an,"SquircleOutline",{
 Size=UDim2.new(1,0,1,0),
 Name="Stroke",
 ImageColor3=Color3.new(1,1,1),
-ImageTransparency=1,
+ImageTransparency=0,
 },{
 ac("UIGradient",{
 Rotation=90,
-Transparency=NumberSequence.new{
-NumberSequenceKeypoint.new(0,0),
-NumberSequenceKeypoint.new(1,1),
-},
+Transparency=NumberSequence.new(0),
 }),
 }),
 
